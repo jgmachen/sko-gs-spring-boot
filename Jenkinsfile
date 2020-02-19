@@ -42,12 +42,7 @@ spec:
     success {
       script {
         if (params.FLOW_CONTEXT == 'deploy') {
-          step([$class: 'ElectricFlowPipelinePublisher',
-            configuration: 'flow-sko-jenkins-config',
-            projectName: 'user32_project',
-            pipelineName: 'user32',
-            addParam: '{"pipeline":{"pipelineName":"user32","parameters":"[{\\\"parameterName\\\": \\\"jenkinsJobName\\\", \\\"parameterValue\\\": \\\"'+"${env.JOB_NAME}"+'\\\"},{\\\"parameterName\\\": \\\"jenkinsBuildNumber\\\", \\\"parameterValue\\\": \\\"'+"${env.BUILD_NUMBER}"+'\\\"}]"}}'
-          ])
+          step(cloudBeesFlowRunPipeline addParam: '{"pipeline":{"pipelineName":"user32","parameters":[{"parameterName":"jenkinsBuildNumber","parameterValue":"${env.BUILD_NUMBER}"},{"parameterName":"jenkinsJobName","parameterValue":"${env.JOB_NAME}"},{"parameterName":"passingComplexity","parameterValue":""}]}}', configuration: 'flow-sko-jenkins-config', pipelineName: 'user32', projectName: 'user32_project')
         }
       }
     }
